@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regex Pattern Matching | Monish B</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        text-align: center;
+        background: #fdf3f4;
+      }
+
+      h1 {
+        margin-top: 30px;
+      }
+
+      form {
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      input {
+        margin: 10px;
+      }
+
+      .bord {
+        border: 1px dotted gray;
+      }
+
+      #result {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>RegEx</h1>
+    <form id="f1" name="f1>
+      <input
+        class="form-control"
+        name="sourStr"
+        type="text"
+        placeholder="Enter text"
+        required
+      /><br />
+      <input
+        class="form-control"
+        name="pattStr"
+        type="text"
+        placeholder="Enter Pattern"
+        required
+      /><br />
+      <input
+        class="btn btn-primary btn-lg"
+        type="submit"
+        value="Find pattern"
+      />
+      <br />
+      <div id="result">
+        <h4 id="res"></h4>
+        <h4 id="resIndex"></h4>
+      </div>
+    </form>
+
+    <script>
+      const form = document.getElementById("f1");
+      const res = document.getElementById("res");
+      const resIndex = document.getElementById("resIndex");
+      const result_div = document.getElementById("result");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const sourceString = document.f1.sourStr.value;
+        const patternString = document.f1.pattStr.value;
+        const patternLength = patternString.length;
+        console.log(patternLength);
+        var myRe = new RegExp(patternString, "i");
+        var matchedPattern = myRe.exec(sourceString);
+        console.log(matchedPattern);
+        if (matchedPattern) {
+          res.innerHTML = `Pattern: ${matchedPattern[0]}`;
+          resIndex.innerHTML = `Index: From ${matchedPattern.index} to ${
+            matchedPattern.index + (patternLength - 1)
+          }`;
+          result_div.classList.add("bord");
+        } else {
+          res.innerHTML = "OOPS! Pattern Not Found";
+          resIndex.innerHTML = "";
+          result_div.classList.add("bord");
+        }
+      });
+    </script>
+  </body>
+</html>
